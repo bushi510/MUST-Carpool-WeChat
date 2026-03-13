@@ -10,8 +10,8 @@
 
   <!-- 登录按钮区域 -->
   <view class="login-section">
-    <!-- 注意：第一步我们先用普通的 bindtap，后续演进时再换成 open-type="getPhoneNumber" -->
-    <button class="btn-primary" bindtap="handleLoginClick">
+    <!-- 这里已经正确绑定了 handleLogin -->
+    <button class="btn-primary" bindtap="handleLogin">
       微信一键授权登录
     </button>
     
