@@ -1,0 +1,36 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  
+  <!-- 顶部 Logo 区域 -->
+  <view class="header">
+    <image class="logo" src="../../images/logo.png" mode="aspectFit"></image>
+    <text class="title">MUST 校园拼车</text>
+    <text class="subtitle">安全、便捷的校内外共享出行</text>
+  </view>
+
+  <!-- 登录按钮区域 -->
+  <view class="login-section">
+    <!-- 注意：第一步我们先用普通的 bindtap，后续演进时再换成 open-type="getPhoneNumber" -->
+    <button class="btn-primary" bindtap="handleLoginClick">
+      微信一键授权登录
+    </button>
+    
+    <button class="btn-secondary" bindtap="handleCancel">
+      暂不登录，先看看
+    </button>
+  </view>
+
+  <!-- 底部协议区域 -->
+  <view class="footer">
+    <checkbox-group bindchange="handleAgreementChange">
+      <label class="agreement-label">
+        <checkbox value="agree" checked="{{isAgreed}}" color="#0056A0" style="transform:scale(0.7)"/>
+        <text class="text-muted">我已阅读并同意</text>
+        <text class="text-link">《用户服务协议》</text>
+        <text class="text-muted">与</text>
+        <text class="text-link">《隐私政策》</text>
+      </label>
+    </checkbox-group>
+  </view>
+
+</view>
