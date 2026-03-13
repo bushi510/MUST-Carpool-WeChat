@@ -1,0 +1,148 @@
+page {
+  background-color: #f4f6f8;
+}
+
+.user-section {
+  background-color: #003366; /* MUST 蓝 */
+  padding: 60rpx 40rpx 100rpx 40rpx;
+  color: #ffffff;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  background-color: #fff;
+}
+
+.user-detail {
+  margin-left: 30rpx;
+}
+
+.nickname {
+  font-size: 40rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.auth-tag {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.auth-tag text {
+  margin-left: 8rpx;
+}
+
+/* 统计条 */
+.stats-bar {
+  display: flex;
+  background-color: #ffffff;
+  margin: -40rpx 30rpx 30rpx 30rpx;
+  border-radius: 20rpx;
+  padding: 30rpx 0;
+  box-shadow: 0 8rpx 20rpx rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 10;
+}
+
+.stats-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1rpx solid #f0f0f0;
+}
+
+.stats-item:last-child {
+  border-right: none;
+}
+
+.stats-item .num {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #003366;
+}
+
+.stats-item .label {
+  font-size: 22rpx;
+  color: #999999;
+  margin-top: 6rpx;
+}
+
+/* 菜单列表 */
+.menu-list {
+  background-color: #ffffff;
+  margin: 0 30rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.mt-20 {
+  margin-top: 20rpx;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35rpx 30rpx;
+  border-bottom: 1rpx solid #f9f9f9;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+}
+
+.iconfont {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+
+.menu-text {
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+}
+
+.status-text {
+  font-size: 26rpx;
+  color: #999999;
+  margin-right: 10rpx;
+}
+
+.arrow {
+  color: #cccccc;
+  font-size: 30rpx;
+}
+
+.logout-btn {
+  margin: 60rpx 30rpx;
+  background-color: #ffffff;
+  color: #ff4d4f;
+  text-align: center;
+  padding: 30rpx 0;
+  border-radius: 20rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
