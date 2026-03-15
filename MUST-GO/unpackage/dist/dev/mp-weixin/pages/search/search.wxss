@@ -1,0 +1,7 @@
+
+.search-page.data-v-c10c040c { padding: 30rpx;
+}
+.result-box.data-v-c10c040c { padding: 20rpx 0;
+}
+.empty.data-v-c10c040c { text-align: center; margin-top: 100rpx;
+} 

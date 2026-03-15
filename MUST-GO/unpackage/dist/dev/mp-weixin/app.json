@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/publish/publish",
+    "pages/profile/profile",
+    "pages/search/search",
+    "pages/ride-detail/ride-detail",
+    "pages/order/order",
+    "pages/chat/chat",
+    "pages/certify/certify",
+    "pages/wallet/wallet",
+    "pages/service/service"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "拼车GO",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f5f7fa"
+  },
+  "tabBar": {
+    "color": "#909399",
+    "selectedColor": "#00C853",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要您的位置信息以匹配附近行程和显示地图"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "usingComponents": {}
+}
