@@ -37,7 +37,7 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(($event) => formData.value.name = $event, "48"),
+        a: common_vendor.o(($event) => formData.value.name = $event, "a0"),
         b: common_vendor.p({
           placeholder: "请输入姓名",
           modelValue: formData.value.name
@@ -47,7 +47,7 @@ const _sfc_main = {
           name: "name",
           required: true
         }),
-        d: common_vendor.o(($event) => formData.value.plate = $event, "e4"),
+        d: common_vendor.o(($event) => formData.value.plate = $event, "19"),
         e: common_vendor.p({
           placeholder: "例: 粤B12345",
           modelValue: formData.value.plate
@@ -57,7 +57,7 @@ const _sfc_main = {
           name: "plate",
           required: true
         }),
-        g: common_vendor.o(($event) => formData.value.carType = $event, "d6"),
+        g: common_vendor.o(($event) => formData.value.carType = $event, "97"),
         h: common_vendor.p({
           placeholder: "例: 丰田卡罗拉 白色",
           modelValue: formData.value.carType
@@ -76,7 +76,7 @@ const _sfc_main = {
           ["label-width"]: "80"
         }),
         l: common_vendor.t(common_vendor.unref(userStore).userInfo.isCertified ? "已通过认证" : "提交认证"),
-        m: common_vendor.o(submitCertify, "e9"),
+        m: common_vendor.o(submitCertify, "ee"),
         n: common_vendor.unref(userStore).userInfo.isCertified
       };
     };

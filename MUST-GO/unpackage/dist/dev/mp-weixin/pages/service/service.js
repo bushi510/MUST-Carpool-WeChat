@@ -18,6 +18,9 @@ const _sfc_main = {
     const goOnlineSupport = () => {
       common_vendor.index.navigateTo({ url: "/pages/chat/chat?target=kefu" });
     };
+    const goAIChat = () => {
+      common_vendor.index.navigateTo({ url: "/pages/chat/chat?target=kefu" });
+    };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -25,17 +28,18 @@ const _sfc_main = {
           size: "50",
           color: "var(--pc-primary)"
         }),
-        b: common_vendor.o(goOnlineSupport, "bc"),
-        c: common_vendor.p({
+        b: common_vendor.o(goAIChat, "20"),
+        c: common_vendor.o(goOnlineSupport, "8c"),
+        d: common_vendor.p({
           title: "如何发布拼车行程？"
         }),
-        d: common_vendor.p({
+        e: common_vendor.p({
           title: "车主认证需要多久？"
         }),
-        e: common_vendor.p({
+        f: common_vendor.p({
           title: "如何取消已预订的行程？"
         }),
-        f: common_vendor.p({
+        g: common_vendor.p({
           accordion: true
         })
       };

@@ -2402,6 +2402,23 @@
   flex-direction: column;
   background: var(--pc-bg);
 }
+.ai-bar.data-v-0a633310 {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  background: var(--pc-primary);
+  padding: 20rpx 30rpx;
+}
+.ai-bar .ai-bar-text.data-v-0a633310 {
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.ai-bar .ai-bar-sub.data-v-0a633310 {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 22rpx;
+  margin-left: auto;
+}
 .msg-list.data-v-0a633310 {
   flex: 1;
   padding: 30rpx;
@@ -2421,6 +2438,26 @@
 .msg-row.me .bubble.data-v-0a633310 {
   background: var(--pc-primary);
   color: #fff;
+}
+.loading-bubble.data-v-0a633310 {
+  min-width: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dot.data-v-0a633310 {
+  font-size: 36rpx;
+  color: var(--pc-sub);
+  letter-spacing: 4rpx;
+  animation: blink-0a633310 1s infinite;
+}
+@keyframes blink-0a633310 {
+0%, 100% {
+    opacity: 1;
+}
+50% {
+    opacity: 0.3;
+}
 }
 .input-bar.data-v-0a633310 {
   display: flex;

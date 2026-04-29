@@ -16,8 +16,8 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(($event) => handleAction("充值"), "f2"),
-        b: common_vendor.o(($event) => handleAction("提现"), "85"),
+        a: common_vendor.o(($event) => handleAction("充值"), "b6"),
+        b: common_vendor.o(($event) => handleAction("提现"), "07"),
         c: common_vendor.p({
           type: "wallet",
           size: "50",

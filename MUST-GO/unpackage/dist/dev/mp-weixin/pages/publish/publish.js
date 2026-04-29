@@ -61,20 +61,20 @@ const _sfc_main = {
     return (_ctx, _cache) => {
       return {
         a: common_vendor.t(formData.value.start || "点击选择出发地"),
-        b: common_vendor.o(($event) => pickLocation("start"), "32"),
+        b: common_vendor.o(($event) => pickLocation("start"), "ff"),
         c: common_vendor.p({
           label: "出发地",
           name: "start",
           required: true
         }),
         d: common_vendor.t(formData.value.end || "点击选择目的地"),
-        e: common_vendor.o(($event) => pickLocation("end"), "8b"),
+        e: common_vendor.o(($event) => pickLocation("end"), "84"),
         f: common_vendor.p({
           label: "目的地",
           name: "end",
           required: true
         }),
-        g: common_vendor.o(($event) => formData.value.time = $event, "9f"),
+        g: common_vendor.o(($event) => formData.value.time = $event, "8c"),
         h: common_vendor.p({
           type: "datetime",
           modelValue: formData.value.time
@@ -84,7 +84,7 @@ const _sfc_main = {
           name: "time",
           required: true
         }),
-        j: common_vendor.o(($event) => formData.value.seats = $event, "9f"),
+        j: common_vendor.o(($event) => formData.value.seats = $event, "30"),
         k: common_vendor.p({
           min: 1,
           max: 6,
@@ -95,7 +95,7 @@ const _sfc_main = {
           name: "seats",
           required: true
         }),
-        m: common_vendor.o(($event) => formData.value.price = $event, "a9"),
+        m: common_vendor.o(($event) => formData.value.price = $event, "c4"),
         n: common_vendor.p({
           type: "digit",
           placeholder: "输入金额",
@@ -114,7 +114,7 @@ const _sfc_main = {
           rules,
           ["label-position"]: "top"
         }),
-        r: common_vendor.o(submit, "6c")
+        r: common_vendor.o(submit, "5b")
       };
     };
   }

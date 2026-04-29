@@ -2418,12 +2418,24 @@
 .desc.data-v-cb2df937 {
   font-size: 24rpx;
 }
+.btn-group.data-v-cb2df937 {
+  display: flex;
+  gap: 16rpx;
+}
+.ai-btn.data-v-cb2df937 {
+  margin: 0;
+  font-size: 26rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 140rpx;
+  background: #10b981;
+}
 .chat-btn.data-v-cb2df937 {
   margin: 0;
   font-size: 26rpx;
   height: 60rpx;
   line-height: 60rpx;
-  width: 160rpx;
+  width: 140rpx;
 }
 .faq-section.data-v-cb2df937 {
   padding: 0;
