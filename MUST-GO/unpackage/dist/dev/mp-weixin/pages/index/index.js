@@ -70,7 +70,7 @@ const _sfc_main = {
     const goPublish = () => common_vendor.index.navigateTo({ url: `/pages/publish/publish` });
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(goSearch, "f9"),
+        a: common_vendor.o(goSearch, "b4"),
         b: common_vendor.p({
           placeholder: "你要去哪里？",
           radius: "100",
@@ -80,7 +80,7 @@ const _sfc_main = {
         d: currentLoc.value.lng,
         e: markers.value,
         f: polyline.value,
-        g: common_vendor.o(refreshData, "5f"),
+        g: common_vendor.o(refreshData, "e2"),
         h: common_vendor.p({
           type: "loop",
           size: "24",
@@ -113,7 +113,7 @@ const _sfc_main = {
           size: "30",
           color: "#fff"
         }),
-        n: common_vendor.o(goPublish, "13")
+        n: common_vendor.o(goPublish, "cb")
       };
     };
   }

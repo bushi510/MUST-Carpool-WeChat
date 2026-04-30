@@ -25,7 +25,7 @@ const _sfc_main = {
           size: "50",
           color: "var(--pc-primary)"
         }),
-        b: common_vendor.o(goOnlineSupport, "bc"),
+        b: common_vendor.o(goOnlineSupport, "98"),
         c: common_vendor.p({
           title: "如何发布拼车行程？"
         }),

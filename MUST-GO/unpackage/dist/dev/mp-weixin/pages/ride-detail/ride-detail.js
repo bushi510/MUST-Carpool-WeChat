@@ -66,7 +66,7 @@ const _sfc_main = {
           color: "#fff"
         }),
         f: common_vendor.t(ride.value.driver),
-        g: common_vendor.o(goChat, "66"),
+        g: common_vendor.o(goChat, "18"),
         h: common_vendor.p({
           type: "chat",
           size: "30",
@@ -79,14 +79,14 @@ const _sfc_main = {
         m: common_vendor.t(ride.value.price),
         n: common_vendor.t(ride.value.seats > 0 ? "确认预订并支付" : "座位已满"),
         o: ride.value.seats <= 0,
-        p: common_vendor.o(handleJoin, "23")
+        p: common_vendor.o(handleJoin, "2a")
       } : {
         q: common_vendor.p({
           type: "info-filled",
           size: "60",
           color: "#ccc"
         }),
-        r: common_vendor.o(goBack, "6f")
+        r: common_vendor.o(goBack, "99")
       });
     };
   }

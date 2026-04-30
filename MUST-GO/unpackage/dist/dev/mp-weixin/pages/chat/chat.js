@@ -36,13 +36,13 @@ const _sfc_main = {
           };
         }),
         b: bottomId.value,
-        c: common_vendor.o(($event) => inputVal.value = $event, "d6"),
+        c: common_vendor.o(($event) => inputVal.value = $event, "c5"),
         d: common_vendor.p({
           placeholder: "发消息...",
           clearable: false,
           modelValue: inputVal.value
         }),
-        e: common_vendor.o(send, "d4")
+        e: common_vendor.o(send, "f3")
       };
     };
   }

@@ -196,7 +196,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: $data.isOpen ? 1 : "",
     h: $props.showAnimation === true ? 1 : ""
   } : {}, {
-    i: common_vendor.o(($event) => $options.onClick(!$data.isOpen), "d0"),
+    i: common_vendor.o(($event) => $options.onClick(!$data.isOpen), "28"),
     j: $data.isOpen && $props.titleBorder === "auto" ? 1 : "",
     k: $props.titleBorder !== "none" ? 1 : "",
     l: $data.elId,
