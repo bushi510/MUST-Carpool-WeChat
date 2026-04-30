@@ -6507,7 +6507,7 @@ function populateParameters(fromRes, toRes) {
   let _SDKVersion = SDKVersion;
   const hostLanguage = (language || "").replace(/_/g, "-");
   const parameters = {
-    appId: "wx04d2634f9a84d7e8",
+    appId: "__UNI__F7F1948",
     appName: "MUST_GO",
     appVersion: "2.0.0",
     appVersionCode: "200",
@@ -6651,7 +6651,7 @@ const getAppBaseInfo = {
     let _hostName = getHostName(fromRes);
     let hostLanguage = (language || "").replace(/_/g, "-");
     const parameters = {
-      appId: "wx04d2634f9a84d7e8",
+      appId: "__UNI__F7F1948",
       appName: "MUST_GO",
       appVersion: "2.0.0",
       appVersionCode: "200",
@@ -7450,9 +7450,15 @@ function isConsoleWritable() {
   return isWritable;
 }
 function initRuntimeSocketService() {
+<<<<<<< HEAD
   const hosts = "192.168.188.1,192.168.228.1,192.168.31.201,127.0.0.1";
   const port = "8090";
   const id = "mp-weixin__6cpOW";
+=======
+  const hosts = "169.254.31.60,169.254.202.47,192.168.31.243,127.0.0.1";
+  const port = "8090";
+  const id = "mp-weixin_lvbEaz";
+>>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
   const lazy = typeof swan !== "undefined";
   let restoreError = lazy ? () => {
   } : initOnError();
@@ -9207,6 +9213,7 @@ exports.onLoad = onLoad;
 exports.onPullDownRefresh = onPullDownRefresh;
 exports.onShow = onShow;
 exports.p = p;
+exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s;
@@ -9214,4 +9221,5 @@ exports.sr = sr;
 exports.t = t;
 exports.unref = unref;
 exports.watch = watch;
+exports.wx$1 = wx$1;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map
