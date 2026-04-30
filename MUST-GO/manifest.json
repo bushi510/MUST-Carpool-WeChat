@@ -1,6 +1,6 @@
 {
     "name" : "MUST_GO",
-    "appid" : "wx04d2634f9a84d7e8",
+    "appid" : "__UNI__F7F1948",
     "description" : "同路人，一起走",
     "versionName" : "2.0.0",
     "versionCode" : "200",
@@ -9,7 +9,7 @@
         "usingComponents" : true
     },
     "mp-weixin" : {
-        "appid" : "wx04d2634f9a84d7e8",
+        "appid" : "wx0060bb54e11a2354",
         "setting" : {
             "urlCheck" : false,
             "minified" : true

@@ -40,7 +40,7 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(($event) => formData.value.phone = $event, "5e"),
+        a: common_vendor.o(($event) => formData.value.phone = $event, "b3"),
         b: common_vendor.p({
           type: "number",
           placeholder: "请输入手机号",
@@ -50,14 +50,14 @@ const _sfc_main = {
         c: common_vendor.p({
           name: "phone"
         }),
-        d: common_vendor.o(($event) => formData.value.code = $event, "77"),
+        d: common_vendor.o(($event) => formData.value.code = $event, "4e"),
         e: common_vendor.p({
           type: "number",
           placeholder: "验证码(1234)",
           prefixIcon: "locked",
           modelValue: formData.value.code
         }),
-        f: common_vendor.o(sendCode, "7d"),
+        f: common_vendor.o(sendCode, "bc"),
         g: common_vendor.p({
           name: "code"
         }),
@@ -68,7 +68,7 @@ const _sfc_main = {
           model: formData.value,
           rules
         }),
-        j: common_vendor.o(handleLogin, "2a")
+        j: common_vendor.o(handleLogin, "06")
       };
     };
   }

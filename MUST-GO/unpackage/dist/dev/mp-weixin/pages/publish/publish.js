@@ -24,101 +24,150 @@ const _sfc_main = {
     const rideStore = stores_ride.useRideStore();
     const userStore = stores_user.useUserStore();
     const formRef = common_vendor.ref(null);
-    const formData = common_vendor.ref({ start: "", end: "", time: "", seats: 1, price: "", lat: 22.54, lng: 113.93 });
+    const isSubmitting = common_vendor.ref(false);
+    const formData = common_vendor.reactive({
+      start: "",
+      end: "",
+      time: "",
+      seats: 1,
+      price: "",
+      start_location: { lat: null, lng: null, address: "" },
+      end_location: { lat: null, lng: null, address: "" }
+    });
     const rules = {
       start: { rules: [{ required: true, errorMessage: "请选择出发地" }] },
       end: { rules: [{ required: true, errorMessage: "请选择目的地" }] },
-      time: { rules: [{ required: true, errorMessage: "请选择时间" }] },
-      price: { rules: [{ required: true, errorMessage: "请填写金额" }] }
+      time: {
+        rules: [
+          { required: true, errorMessage: "请选择时间" },
+          // 优化2：功能逻辑校验，禁止发布过去的时间
+          { validateFunction: (rule, value, data, callback) => {
+            if (new Date(value).getTime() < Date.now())
+              callback("出发时间不能早于当前时间");
+            return true;
+          } }
+        ]
+      },
+      price: {
+        rules: [
+          { required: true, errorMessage: "请填写金额" },
+          { validateFunction: (rule, value, data, callback) => {
+            if (parseFloat(value) <= 0)
+              callback("金额必须大于0");
+            return true;
+          } }
+        ]
+      }
     };
     const pickLocation = (field) => {
       common_vendor.index.chooseLocation({
         success: (res) => {
-          formData.value[field] = res.name;
-          if (field === "start") {
-            formData.value.lat = res.latitude;
-            formData.value.lng = res.longitude;
+          formData[field] = res.name;
+          formData[`${field}_location`] = {
+            lat: res.latitude,
+            lng: res.longitude,
+            address: res.address
+          };
+        },
+        fail: (err) => {
+          if (err.errMsg.includes("auth deny")) {
+            common_vendor.index.showModal({
+              title: "提示",
+              content: "请在设置中开启定位权限以选择地点",
+              success: (res) => {
+                if (res.confirm)
+                  common_vendor.index.openSetting();
+              }
+            });
           }
         }
       });
     };
-    const submit = () => {
+    const submit = async () => {
+      if (isSubmitting.value)
+        return;
       if (!userStore.isLogged)
         return common_vendor.index.navigateTo({ url: "/pages/login/login" });
       if (!userStore.userInfo.isCertified)
         return common_vendor.index.showToast({ title: "请先完成车主认证", icon: "none" });
-      formRef.value.validate().then(() => {
-        common_vendor.index.showLoading({ title: "发布中" });
-        setTimeout(() => {
-          rideStore.publishRide(formData.value);
-          common_vendor.index.hideLoading();
-          common_vendor.index.showToast({ title: "发布成功" });
-          setTimeout(() => common_vendor.index.switchTab({ url: "/pages/index/index" }), 1500);
-        }, 1e3);
-      }).catch(() => {
-      });
+      try {
+        await formRef.value.validate();
+        isSubmitting.value = true;
+        common_vendor.index.showLoading({ title: "发布中", mask: true });
+        const success = await rideStore.publishRide({ ...formData });
+        common_vendor.index.hideLoading();
+        if (success) {
+          common_vendor.index.showToast({ title: "发布成功", icon: "success" });
+          setTimeout(() => {
+            isSubmitting.value = false;
+            common_vendor.index.switchTab({ url: "/pages/index/index" });
+          }, 1500);
+        }
+      } catch (error) {
+        isSubmitting.value = false;
+        common_vendor.index.__f__("error", "at pages/publish/publish.vue:121", "校验失败:", error);
+      }
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.t(formData.value.start || "点击选择出发地"),
-        b: common_vendor.o(($event) => pickLocation("start"), "32"),
+        a: common_vendor.t(formData.start || "点击选择出发地"),
+        b: common_vendor.o(($event) => pickLocation("start"), "ff"),
         c: common_vendor.p({
           label: "出发地",
           name: "start",
           required: true
         }),
-        d: common_vendor.t(formData.value.end || "点击选择目的地"),
-        e: common_vendor.o(($event) => pickLocation("end"), "8b"),
+        d: common_vendor.t(formData.end || "点击选择目的地"),
+        e: common_vendor.o(($event) => pickLocation("end"), "84"),
         f: common_vendor.p({
           label: "目的地",
           name: "end",
           required: true
         }),
-        g: common_vendor.o(($event) => formData.value.time = $event, "9f"),
+        g: common_vendor.o(($event) => formData.time = $event, "df"),
         h: common_vendor.p({
           type: "datetime",
-          modelValue: formData.value.time
+          modelValue: formData.time
         }),
         i: common_vendor.p({
           label: "出发时间",
           name: "time",
           required: true
         }),
-        j: common_vendor.o(($event) => formData.value.seats = $event, "9f"),
+        j: common_vendor.o(($event) => formData.seats = $event, "a5"),
         k: common_vendor.p({
           min: 1,
           max: 6,
-          modelValue: formData.value.seats
+          modelValue: formData.seats
         }),
         l: common_vendor.p({
           label: "提供座位数",
           name: "seats",
           required: true
         }),
-        m: common_vendor.o(($event) => formData.value.price = $event, "a9"),
+        m: common_vendor.o(($event) => formData.price = $event, "00"),
         n: common_vendor.p({
           type: "digit",
           placeholder: "输入金额",
-          modelValue: formData.value.price
+          modelValue: formData.price
         }),
         o: common_vendor.p({
           label: "预期分摊(元/人)",
           name: "price",
           required: true
         }),
-        p: common_vendor.sr(formRef, "bfce3555-0", {
+        p: common_vendor.sr(formRef, "2dc14966-0", {
           "k": "formRef"
         }),
         q: common_vendor.p({
-          model: formData.value,
+          model: formData,
           rules,
           ["label-position"]: "top"
         }),
-        r: common_vendor.o(submit, "6c")
+        r: common_vendor.o(submit, "5b")
       };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-bfce3555"]]);
-wx.createPage(MiniProgramPage);
+wx.createPage(_sfc_main);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/publish/publish.js.map

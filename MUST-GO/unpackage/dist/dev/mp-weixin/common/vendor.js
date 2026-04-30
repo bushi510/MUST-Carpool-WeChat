@@ -6507,14 +6507,14 @@ function populateParameters(fromRes, toRes) {
   let _SDKVersion = SDKVersion;
   const hostLanguage = (language || "").replace(/_/g, "-");
   const parameters = {
-    appId: "wx04d2634f9a84d7e8",
+    appId: "__UNI__F7F1948",
     appName: "MUST_GO",
     appVersion: "2.0.0",
     appVersionCode: "200",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "5.03",
-    uniCompilerVersion: "5.03",
-    uniRuntimeVersion: "5.03",
+    uniCompileVersion: "5.07",
+    uniCompilerVersion: "5.07",
+    uniRuntimeVersion: "5.07",
     uniPlatform: "mp-weixin",
     deviceBrand,
     deviceModel: model,
@@ -6651,7 +6651,7 @@ const getAppBaseInfo = {
     let _hostName = getHostName(fromRes);
     let hostLanguage = (language || "").replace(/_/g, "-");
     const parameters = {
-      appId: "wx04d2634f9a84d7e8",
+      appId: "__UNI__F7F1948",
       appName: "MUST_GO",
       appVersion: "2.0.0",
       appVersionCode: "200",
@@ -6663,9 +6663,9 @@ const getAppBaseInfo = {
       hostTheme: theme,
       isUniAppX: false,
       uniPlatform: "mp-weixin",
-      uniCompileVersion: "5.03",
-      uniCompilerVersion: "5.03",
-      uniRuntimeVersion: "5.03"
+      uniCompileVersion: "5.07",
+      uniCompilerVersion: "5.07",
+      uniRuntimeVersion: "5.07"
     };
     extend(toRes, parameters);
   }
@@ -7450,9 +7450,9 @@ function isConsoleWritable() {
   return isWritable;
 }
 function initRuntimeSocketService() {
-  const hosts = "127.0.0.1,172.16.218.40";
+  const hosts = "169.254.31.60,169.254.202.47,192.168.31.243,127.0.0.1";
   const port = "8090";
-  const id = "mp-weixin_QELwvm";
+  const id = "mp-weixin_lvbEaz";
   const lazy = typeof swan !== "undefined";
   let restoreError = lazy ? () => {
   } : initOnError();
@@ -9207,6 +9207,7 @@ exports.onLoad = onLoad;
 exports.onPullDownRefresh = onPullDownRefresh;
 exports.onShow = onShow;
 exports.p = p;
+exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s;
@@ -9214,4 +9215,5 @@ exports.sr = sr;
 exports.t = t;
 exports.unref = unref;
 exports.watch = watch;
+exports.wx$1 = wx$1;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map

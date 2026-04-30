@@ -41,8 +41,8 @@ const _sfc_main = {
     const goDetail = (id) => common_vendor.index.navigateTo({ url: `/pages/detail/detail?id=${id}` });
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.o(doSearch, "93"),
-        b: common_vendor.o(($event) => keyword.value = $event, "dd"),
+        a: common_vendor.o(doSearch, "ae"),
+        b: common_vendor.o(($event) => keyword.value = $event, "1e"),
         c: common_vendor.p({
           placeholder: "搜索目的地",
           modelValue: keyword.value
