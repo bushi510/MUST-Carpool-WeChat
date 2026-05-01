@@ -156,7 +156,7 @@ const _sfc_main = {
           name: "price",
           required: true
         }),
-        p: common_vendor.sr(formRef, "2dc14966-0", {
+        p: common_vendor.sr(formRef, "52a658cc-0", {
           "k": "formRef"
         }),
         q: common_vendor.p({
