@@ -81,28 +81,17 @@ const _sfc_main = {
             d: common_vendor.n(msg.isMe ? "me" : "other")
           });
         }),
-<<<<<<< HEAD
         d: bottomId.value,
         e: common_vendor.o(($event) => inputVal.value = $event, "f9"),
         f: common_vendor.p({
-=======
-        b: bottomId.value,
-        c: common_vendor.o(($event) => inputVal.value = $event, "c5"),
-        d: common_vendor.p({
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
           placeholder: "发消息...",
           clearable: false,
           disabled: sending.value,
           modelValue: inputVal.value
         }),
-<<<<<<< HEAD
         g: sending.value,
         h: common_vendor.o(send, "fd")
       });
-=======
-        e: common_vendor.o(send, "f3")
-      };
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
     };
   }
 };

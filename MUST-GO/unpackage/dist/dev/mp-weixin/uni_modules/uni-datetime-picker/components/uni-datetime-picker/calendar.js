@@ -534,11 +534,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           return {
             a: common_vendor.o($options.choiceDate, weeksIndex),
             b: common_vendor.o($options.handleMouse, weeksIndex),
-<<<<<<< HEAD
             c: "a23833d4-0-" + i0 + "-" + i1,
-=======
-            c: "17cc7b09-0-" + i0 + "-" + i1,
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
             d: common_vendor.p({
               weeks,
               calendar: $data.calendar,

@@ -110,33 +110,21 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return {
-<<<<<<< HEAD
-        a: common_vendor.t(formData.value.start || "点击选择出发地"),
-=======
         a: common_vendor.t(formData.start || "点击选择出发地"),
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
         b: common_vendor.o(($event) => pickLocation("start"), "ff"),
         c: common_vendor.p({
           label: "出发地",
           name: "start",
           required: true
         }),
-<<<<<<< HEAD
-        d: common_vendor.t(formData.value.end || "点击选择目的地"),
-=======
         d: common_vendor.t(formData.end || "点击选择目的地"),
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
         e: common_vendor.o(($event) => pickLocation("end"), "84"),
         f: common_vendor.p({
           label: "目的地",
           name: "end",
           required: true
         }),
-<<<<<<< HEAD
-        g: common_vendor.o(($event) => formData.value.time = $event, "8c"),
-=======
         g: common_vendor.o(($event) => formData.time = $event, "df"),
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
         h: common_vendor.p({
           type: "datetime",
           modelValue: formData.time
@@ -146,11 +134,7 @@ const _sfc_main = {
           name: "time",
           required: true
         }),
-<<<<<<< HEAD
-        j: common_vendor.o(($event) => formData.value.seats = $event, "30"),
-=======
         j: common_vendor.o(($event) => formData.seats = $event, "a5"),
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
         k: common_vendor.p({
           min: 1,
           max: 6,
@@ -161,11 +145,7 @@ const _sfc_main = {
           name: "seats",
           required: true
         }),
-<<<<<<< HEAD
-        m: common_vendor.o(($event) => formData.value.price = $event, "c4"),
-=======
         m: common_vendor.o(($event) => formData.price = $event, "00"),
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
         n: common_vendor.p({
           type: "digit",
           placeholder: "输入金额",
@@ -176,7 +156,7 @@ const _sfc_main = {
           name: "price",
           required: true
         }),
-        p: common_vendor.sr(formRef, "2dc14966-0", {
+        p: common_vendor.sr(formRef, "52a658cc-0", {
           "k": "formRef"
         }),
         q: common_vendor.p({

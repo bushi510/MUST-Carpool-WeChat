@@ -28,14 +28,9 @@ const _sfc_main = {
           size: "50",
           color: "var(--pc-primary)"
         }),
-<<<<<<< HEAD
         b: common_vendor.o(goAIChat, "20"),
         c: common_vendor.o(goOnlineSupport, "8c"),
         d: common_vendor.p({
-=======
-        b: common_vendor.o(goOnlineSupport, "98"),
-        c: common_vendor.p({
->>>>>>> a1ef7dfbcd9efe6773cb330a5155c84cc8fc7466
           title: "如何发布拼车行程？"
         }),
         e: common_vendor.p({
