@@ -2396,9 +2396,13 @@
 .font-bold.data-v-93207a4f {
   font-weight: bold;
 }
+
+/* 整个页面的背景改为非常浅的灰色，让白色的卡片凸显出来 */
 .order-page.data-v-93207a4f {
-  height: 100vh;
-  padding: 30rpx;
+  min-height: 100vh;
+  background-color: #F4F5F7;
+  padding: 24rpx;
+  box-sizing: border-box;
 }
 .list-wrap.data-v-93207a4f {
   height: 100%;
@@ -2407,45 +2411,121 @@
   text-align: center;
   margin-top: 200rpx;
 }
-.order-card.data-v-93207a4f {
+
+/* 核心卡片样式：圆角、纯白背景、轻微阴影 */
+.beautiful-card.data-v-93207a4f {
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
   margin-bottom: 30rpx;
-  padding: 0;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.03);
+  overflow: hidden;
 }
-.order-header.data-v-93207a4f, .order-body.data-v-93207a4f, .order-footer.data-v-93207a4f {
-  padding: 20rpx 30rpx;
-}
-.border-bottom.data-v-93207a4f {
-  border-bottom: 1px solid var(--pc-border);
-}
-.order-header.data-v-93207a4f {
+
+/* 头部样式：虚线下边框 */
+.card-header.data-v-93207a4f {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 24rpx 30rpx;
+  border-bottom: 2rpx dashed #EEEEEE;
 }
-.order-body.data-v-93207a4f {
+.time-box.data-v-93207a4f {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+.time.data-v-93207a4f {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+/* 主体路线样式：时间轴 */
+.card-body.data-v-93207a4f {
   padding: 30rpx;
 }
-.route.data-v-93207a4f {
+.route-timeline.data-v-93207a4f {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  /* 起点和终点的间距 */
+}
+.route-node.data-v-93207a4f {
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+.dot.data-v-93207a4f {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+}
+
+/* 绿色的起点圆点 */
+.start-dot.data-v-93207a4f {
+  background-color: #00C853;
+  box-shadow: 0 0 0 6rpx #E8F5E9;
+}
+
+/* 橘色的终点圆点 */
+.end-dot.data-v-93207a4f {
+  background-color: #FF7043;
+  box-shadow: 0 0 0 6rpx #FBE9E7;
+}
+
+/* 起终点之间的连线 */
+.timeline-line.data-v-93207a4f {
+  position: absolute;
+  left: 7rpx;
+  /* 对齐圆点中心 */
+  top: 24rpx;
+  bottom: 24rpx;
+  width: 2rpx;
+  background-color: #EEEEEE;
+  z-index: 1;
+}
+.location.data-v-93207a4f {
   font-size: 32rpx;
   font-weight: bold;
-  line-height: 1.5;
 }
-.price.data-v-93207a4f {
-  font-size: 44rpx;
-}
-.order-footer.data-v-93207a4f {
+
+/* 底部样式：价格与按钮 */
+.card-footer.data-v-93207a4f {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--pc-bg);
+  padding: 20rpx 30rpx 24rpx;
+  background-color: #FAFAFA;
+  /* 底部使用极浅的灰色划分区域 */
 }
-.small-btn.data-v-93207a4f {
+.price-box.data-v-93207a4f {
+  color: #00C853;
+  display: flex;
+  align-items: baseline;
+}
+.currency.data-v-93207a4f {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.price-num.data-v-93207a4f {
+  font-size: 44rpx;
+  font-weight: bold;
+  margin-left: 4rpx;
+}
+
+/* 精致的小按钮 */
+.action-btn.data-v-93207a4f {
   margin: 0;
-  width: 160rpx;
+  padding: 0 40rpx;
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  background-color: #00C853;
+  color: #FFFFFF;
+  border: none;
+  font-weight: 500;
+}
+.action-btn.data-v-93207a4f::after {
+  border: none;
 }

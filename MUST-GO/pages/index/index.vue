@@ -20,7 +20,7 @@
       
       <uni-transition mode="fade" :show="true">
         <uni-list :border="false">
-          <uni-list-item v-for="ride in rideStore.rides.filter(r => r.status === 'recruiting')" :key="ride.id" clickable @click="goDetail(ride.id)">
+          <uni-list-item v-for="ride in rideStore.rides.filter(r => r.status === 'recruiting')" :key="ride._id || ride.id" clickable @click="goDetail(ride._id || ride.id)">
             <template v-slot:body>
               <view class="ride-item">
                 <view class="route">
@@ -43,7 +43,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app'
+import { onLoad, onShow, onPullDownRefresh } from '@dcloudio/uni-app'
 import { useRideStore } from '@/stores/ride'
 
 const rideStore = useRideStore()
@@ -64,6 +64,13 @@ const polyline = ref([{
 }])
 
 onLoad(() => { getLocation() })
+
+// ✨ 新增：每次进入或返回首页时，强制去云端拉取真实的最新行程列表
+onShow(() => {
+  if (rideStore.fetchRides) {
+    rideStore.fetchRides()
+  }
+})
 
 // 添加下拉刷新生命周期
 onPullDownRefresh(() => {
