@@ -1,0 +1,44 @@
+@import '@/uni_modules/uni-scss/index.scss';
+
+:root {
+  --pc-primary: #00C853;
+  --pc-bg: #f5f7fa;
+  --pc-card-bg: #ffffff;
+  --pc-text-main: #333333;
+  --pc-text-sub: #909399;
+  --pc-border: #ebeef5;
+  --pc-radius-lg: 32rpx;
+  --pc-radius-round: 100rpx;
+  --pc-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+  --pc-shadow-primary: 0 8rpx 24rpx rgba(0, 200, 83, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pc-bg: #121212;
+    --pc-card-bg: #1e1e1e;
+    --pc-text-main: #e0e0e0;
+    --pc-text-sub: #888888;
+    --pc-border: #333333;
+    --pc-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.5);
+    --pc-shadow-primary: 0 8rpx 24rpx rgba(0, 200, 83, 0.1);
+  }
+}
+
+/* 核心基础类 */
+.pc-page {
+  min-height: 100vh;
+  background-color: var(--pc-bg);
+  color: var(--pc-text-main);
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+}
+.pc-box { box-sizing: border-box; }
+
+/* 现代UI组件类 */
+.modern-card { background: var(--pc-card-bg); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-shadow); overflow: hidden; box-sizing: border-box; }
+.modern-btn { background: linear-gradient(135deg, #00C853 0%, #00E676 100%); color: #fff; border-radius: var(--pc-radius-round); box-shadow: var(--pc-shadow-primary); border: none; font-weight: bold; }
+.text-primary { color: var(--pc-primary); }
+.text-main { color: var(--pc-text-main); }
+.text-sub { color: var(--pc-text-sub); }
+.font-bold { font-weight: bold; }
