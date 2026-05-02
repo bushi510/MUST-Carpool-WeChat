@@ -22,6 +22,17 @@
           <view class="detail-row"><text class="label text-sub">余座：</text>{{ ride.seats }} 个</view>
           <view class="detail-row"><text class="label text-sub">价格：</text><text class="price text-primary">￥{{ ride.price }}</text></view>
         </view>
+        
+        <view class="remark-section">
+          <view class="section-title">
+            <uni-icons type="chatbubble-filled" size="18" color="#00C853"></uni-icons>
+            <text class="title-text">行程备注</text>
+          </view>
+          <view class="remark-content">
+            <text>{{ ride.remark || '车主很懒，没有留下备注信息~' }}</text>
+          </view>
+        </view>
+        
       </view>
       
       <view class="footer-bar modern-card">
@@ -108,4 +119,30 @@ const handleJoin = () => {
 .error-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh; }
 .mt-20 { margin-top: 20rpx; }
 .back-btn { margin-top: 60rpx; width: 60%; }
+
+/* 新增：备注相关样式 */
+.remark-section {
+  margin-top: 30rpx;
+  padding-top: 30rpx;
+  border-top: 1px dashed #eee;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.title-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-left: 10rpx;
+}
+.remark-content {
+  background-color: #f8f9fa;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
 </style>

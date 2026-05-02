@@ -17,6 +17,16 @@
         <uni-forms-item label="预期分摊(元/人)" name="price" required>
           <uni-easyinput v-model="formData.price" type="digit" placeholder="输入金额" />
         </uni-forms-item>
+        
+        <uni-forms-item label="备注信息" name="remark">
+          <uni-easyinput 
+            type="textarea" 
+            v-model="formData.remark" 
+            placeholder="例如: 准时出发, 不抽烟, 有大件行李请提前告知..." 
+            autoHeight 
+            maxlength="100"
+          />
+        </uni-forms-item>
       </uni-forms>
     </view>
     <button class="modern-btn publish-btn" @click="submit">确认发布</button>
@@ -40,6 +50,7 @@ const formData = reactive({
   time: '', 
   seats: 1, 
   price: '',
+  remark: '', // 新增：备注字段
   start_location: { lat: null, lng: null, address: '' },
   end_location: { lat: null, lng: null, address: '' }
 })
@@ -100,11 +111,12 @@ const submit = async () => {
 
   try {
     await formRef.value.validate()
-    isSubmitting.value = true // 开启提交锁[cite: 1]
+    isSubmitting.value = true // 开启提交锁
     
     uni.showLoading({ title: '发布中', mask: true })
     
-    // 优化5：将提交逻辑改为异步处理，并清理过期数据[cite: 1]
+    // 优化5：将提交逻辑改为异步处理，并清理过期数据
+    // 注意：这里由于传入了 {...formData}，所以 remark 会自动一起传给 pinia 和云数据库
     const success = await rideStore.publishRide({ ...formData })
     
     uni.hideLoading()
