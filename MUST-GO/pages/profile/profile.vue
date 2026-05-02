@@ -20,6 +20,7 @@
       <uni-list :border="false">
         <uni-list-item title="车主认证" clickable showArrow showExtraIcon :extraIcon="{type: 'vip', size: '22', color: '#00C853'}" @click="navTo('/pages/certify/certify')" />
         <uni-list-item title="我的钱包" clickable showArrow showExtraIcon :extraIcon="{type: 'wallet', size: '22', color: '#00C853'}" rightText="￥0.00" @click="navTo('/pages/wallet/wallet')" />
+		<uni-list-item title="我的订单" clickable showArrow showExtraIcon :extraIcon="{type: 'list', size: '22', color: '#00C853'}" @click="navTo('/pages/order/order')" />
         <uni-list-item title="联系客服" clickable showArrow showExtraIcon :extraIcon="{type: 'headphones', size: '22', color: '#00C853'}" @click="navTo('/pages/service/service')" />
       </uni-list>
     </view>

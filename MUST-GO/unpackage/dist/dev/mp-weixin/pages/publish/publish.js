@@ -31,6 +31,8 @@ const _sfc_main = {
       time: "",
       seats: 1,
       price: "",
+      remark: "",
+      // 新增：备注字段
       start_location: { lat: null, lng: null, address: "" },
       end_location: { lat: null, lng: null, address: "" }
     });
@@ -105,7 +107,7 @@ const _sfc_main = {
         }
       } catch (error) {
         isSubmitting.value = false;
-        common_vendor.index.__f__("error", "at pages/publish/publish.vue:121", "校验失败:", error);
+        common_vendor.index.__f__("error", "at pages/publish/publish.vue:133", "校验失败:", error);
       }
     };
     return (_ctx, _cache) => {
@@ -156,15 +158,27 @@ const _sfc_main = {
           name: "price",
           required: true
         }),
-        p: common_vendor.sr(formRef, "52a658cc-0", {
+        p: common_vendor.o(($event) => formData.remark = $event, "ed"),
+        q: common_vendor.p({
+          type: "textarea",
+          placeholder: "例如: 准时出发, 不抽烟, 有大件行李请提前告知...",
+          autoHeight: true,
+          maxlength: "100",
+          modelValue: formData.remark
+        }),
+        r: common_vendor.p({
+          label: "备注信息",
+          name: "remark"
+        }),
+        s: common_vendor.sr(formRef, "1dfa478f-0", {
           "k": "formRef"
         }),
-        q: common_vendor.p({
+        t: common_vendor.p({
           model: formData,
           rules,
           ["label-position"]: "top"
         }),
-        r: common_vendor.o(submit, "5b")
+        v: common_vendor.o(submit, "76")
       };
     };
   }

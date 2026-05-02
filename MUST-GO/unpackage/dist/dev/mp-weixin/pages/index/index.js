@@ -43,6 +43,11 @@ const _sfc_main = {
     common_vendor.onLoad(() => {
       getLocation();
     });
+    common_vendor.onShow(() => {
+      if (rideStore.fetchRides) {
+        rideStore.fetchRides();
+      }
+    });
     common_vendor.onPullDownRefresh(() => {
       refreshData("下拉刷新成功");
     });
@@ -93,8 +98,8 @@ const _sfc_main = {
             c: common_vendor.t(ride.time),
             d: common_vendor.t(ride.seats),
             e: common_vendor.t(ride.price),
-            f: ride.id,
-            g: common_vendor.o(($event) => goDetail(ride.id), ride.id),
+            f: ride._id || ride.id,
+            g: common_vendor.o(($event) => goDetail(ride._id || ride.id), ride._id || ride.id),
             h: "1cf27b2a-4-" + i0 + ",1cf27b2a-3"
           };
         }),
@@ -113,7 +118,7 @@ const _sfc_main = {
           size: "30",
           color: "#fff"
         }),
-        n: common_vendor.o(goPublish, "cb")
+        n: common_vendor.o(goPublish, "de")
       };
     };
   }

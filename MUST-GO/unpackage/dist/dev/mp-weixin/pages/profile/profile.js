@@ -62,8 +62,8 @@ const _sfc_main = {
           circle: true
         })
       } : {}, {
-        f: common_vendor.o(checkLogin, "2e"),
-        g: common_vendor.o(($event) => navTo("/pages/certify/certify"), "f2"),
+        f: common_vendor.o(checkLogin, "e0"),
+        g: common_vendor.o(($event) => navTo("/pages/certify/certify"), "69"),
         h: common_vendor.p({
           title: "车主认证",
           clickable: true,
@@ -75,7 +75,7 @@ const _sfc_main = {
             color: "#00C853"
           }
         }),
-        i: common_vendor.o(($event) => navTo("/pages/wallet/wallet"), "0b"),
+        i: common_vendor.o(($event) => navTo("/pages/wallet/wallet"), "4f"),
         j: common_vendor.p({
           title: "我的钱包",
           clickable: true,
@@ -88,8 +88,20 @@ const _sfc_main = {
           },
           rightText: "￥0.00"
         }),
-        k: common_vendor.o(($event) => navTo("/pages/service/service"), "dd"),
+        k: common_vendor.o(($event) => navTo("/pages/order/order"), "3c"),
         l: common_vendor.p({
+          title: "我的订单",
+          clickable: true,
+          showArrow: true,
+          showExtraIcon: true,
+          extraIcon: {
+            type: "list",
+            size: "22",
+            color: "#00C853"
+          }
+        }),
+        m: common_vendor.o(($event) => navTo("/pages/service/service"), "48"),
+        n: common_vendor.p({
           title: "联系客服",
           clickable: true,
           showArrow: true,
@@ -100,12 +112,12 @@ const _sfc_main = {
             color: "#00C853"
           }
         }),
-        m: common_vendor.p({
+        o: common_vendor.p({
           border: false
         }),
-        n: common_vendor.unref(userStore).isLogged
+        p: common_vendor.unref(userStore).isLogged
       }, common_vendor.unref(userStore).isLogged ? {
-        o: common_vendor.o(handleLogout, "1a")
+        q: common_vendor.o(handleLogout, "eb")
       } : {});
     };
   }

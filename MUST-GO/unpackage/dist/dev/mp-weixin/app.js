@@ -20,22 +20,18 @@ const _sfc_main = {
   __name: "App",
   setup(__props) {
     common_vendor.onLaunch(() => {
-      const userStore = stores_user.useUserStore();
-      const rideStore = stores_ride.useRideStore();
-      userStore.init();
-      rideStore.init();
       if (!common_vendor.wx$1.cloud) {
-        common_vendor.index.__f__(
-          "error",
-          "at App.vue:15",
-          "请使用 2.2.3 或以上的基础库以使用云能力"
-        );
+        common_vendor.index.__f__("error", "at App.vue:9", "请使用 2.2.3 或以上的基础库以使用云能力");
       } else {
         common_vendor.wx$1.cloud.init({
           env: "cloudbase-d8gs0x2y67fedcaef",
           traceUser: true
         });
       }
+      const userStore = stores_user.useUserStore();
+      const rideStore = stores_ride.useRideStore();
+      userStore.init();
+      rideStore.init();
     });
     return () => {
     };

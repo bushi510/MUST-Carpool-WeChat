@@ -1,7 +1,7 @@
 <template>
   <view class="pc-page pc-box">
     <view v-if="ride" class="detail-container">
-      <map class="detail-map" :latitude="ride.lat" :longitude="ride.lng" :markers="markers"></map>
+      <map class="detail-map" v-if="ride && ride.start_location" :latitude="ride.start_location.lat" :longitude="ride.start_location.lng" :markers="markers"></map>
       
       <view class="info-card modern-card">
         <view class="driver-box">
@@ -22,24 +22,19 @@
           <view class="detail-row"><text class="label text-sub">余座：</text>{{ ride.seats }} 个</view>
           <view class="detail-row"><text class="label text-sub">价格：</text><text class="price text-primary">￥{{ ride.price }}</text></view>
         </view>
-        
-        <view class="remark-section">
-          <view class="section-title">
-            <uni-icons type="chatbubble-filled" size="18" color="#00C853"></uni-icons>
-            <text class="title-text">行程备注</text>
-          </view>
-          <view class="remark-content">
-            <text>{{ ride.remark || '车主很懒，没有留下备注信息~' }}</text>
-          </view>
-        </view>
-        
       </view>
       
       <view class="footer-bar modern-card">
-        <button class="modern-btn join-btn" :disabled="ride.seats <= 0" @click="handleJoin">
-          {{ ride.seats > 0 ? '确认预订并支付' : '座位已满' }}
-        </button>
-      </view>
+              <!-- 如果已经买过了，显示进入聊天按钮 -->
+              <button v-if="hasJoined" class="modern-btn join-btn" style="background: #f0f0f0; color: #00C853; font-weight: bold;" @click="goChat">
+                已加入该行程，进入群聊
+              </button>
+              
+              <!-- 如果还没买，走原来的逻辑 -->
+              <button v-else class="modern-btn join-btn" :disabled="ride.seats <= 0" @click="handleJoin">
+                {{ ride.seats > 0 ? '确认预订并支付' : '座位已满' }}
+              </button>
+            </view>
     </view>
 
     <view v-else class="error-state">
@@ -52,50 +47,114 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+// ✨ 引入了 onShow
+import { onLoad, onShow } from '@dcloudio/uni-app'
 import { useRideStore } from '@/stores/ride'
 import { useUserStore } from '@/stores/user'
 
 const rideStore = useRideStore()
 const userStore = useUserStore()
-const ride = ref(null)
 
-// 针对微信小程序，如果缺失 iconPath 会有警告，这里使用相对路径。
-// 请务必确保项目中存在这个图片，或者忽略控制台降级为默认 marker 的黄色提示
-const markers = computed(() => ride.value ? [{ 
-  latitude: ride.value.lat, longitude: ride.value.lng, 
-  iconPath: '../../static/car.png', 
-  width: 32, height: 32 
-}] : [])
+// 1. 专门用一个变量存一下从上个页面传过来的 ID
+const currentId = ref('')
+// ✨ 新增：用来记录当前用户是否已加入
+const hasJoined = ref(false) 
 
 onLoad((options) => {
   if (options.id) {
-    // 强制转换为数字类型以匹配 Pinia 中的数据格式
-    ride.value = rideStore.rides.find(r => r.id === Number(options.id))
+    currentId.value = options.id
   }
 })
 
-const goChat = () => uni.navigateTo({ url: '/pages/chat/chat' })
+// ✨ 新增：每次页面显示时，去查一下云数据库有没有这个订单
+onShow(async () => {
+  if (!currentId.value) return
+  
+  const userInfo = uni.getStorageSync('userInfo')
+  const currentUserId = userInfo && userInfo._id ? userInfo._id : 'test_user_001'
+  
+  try {
+    const db = wx.cloud.database()
+    // 去 order_list 里找：ride_id 是当前行程，且 passenger_id 是当前用户的订单
+    const res = await db.collection('order_list').where({
+      ride_id: currentId.value,
+      passenger_id: currentUserId
+    }).get()
+    
+    // 如果查到的数组长度大于0，说明买过了
+    if (res.data.length > 0) {
+      hasJoined.value = true
+    } else {
+      hasJoined.value = false
+    }
+  } catch (e) {
+    console.error('检查订单状态失败:', e)
+  }
+})
+
+// 2. 【核心修复】将 ride 变成计算属性！
+// 这样无论云端数据什么时候回来，它都会自动重新计算并显示到页面上
+const ride = computed(() => {
+  return rideStore.rides.find(r => r._id === currentId.value || r.id === currentId.value)
+})
+
+// 3. 【地图修复】确保从 start_location 里面取经纬度
+const markers = computed(() => {
+  if (ride.value && ride.value.start_location) {
+    return [{ 
+      latitude: ride.value.start_location.lat, 
+      longitude: ride.value.start_location.lng, 
+      iconPath: '../../static/car.png', 
+      width: 32, height: 32 
+    }]
+  }
+  return []
+})
+
+// 注意这里：传参优先使用微信云数据的 _id
+const goChat = () => uni.navigateTo({ url: `/pages/chat/chat?rideId=${ride.value._id || ride.value.id}` })
 const goBack = () => uni.switchTab({ url: '/pages/index/index' })
 
 const handleJoin = () => {
   if (!userStore.isLogged) return uni.navigateTo({ url: '/pages/login/login' })
+  
+  // 获取当前用户ID
+  const currentUserId = uni.getStorageSync('userInfo')._id || 'test_user_001'
+
   uni.showModal({
     title: '模拟支付',
     content: `需支付 ￥${ride.value.price} 元，确认支付吗？`,
-    success: (res) => {
+    success: async (res) => {
       if (res.confirm) {
-        uni.showLoading({ title: '支付中' })
-        setTimeout(() => {
+        uni.showLoading({ title: '处理中...' })
+        
+        try {
+          const db = wx.cloud.database()
+          // 往云数据库的 order_list 集合中插入一条真实的订单记录
+          await db.collection('order_list').add({
+            data: {
+              ride_id: ride.value._id || ride.value.id, // 关联的行程ID
+              passenger_id: currentUserId,              // 乘客（当前用户）ID
+              driver_name: ride.value.driver,           // 司机名字
+              start: ride.value.start,                  // 出发地
+              end: ride.value.end,                      // 目的地
+              price: ride.value.price,                  // 价格
+              status: 'completed',                      // 订单状态（已完成）
+              create_time: Date.now()                   // 下单时间
+            }
+          })
+          
           uni.hideLoading()
-          const success = rideStore.joinRide(ride.value.id)
-          if (success) {
-            uni.showToast({ title: '预订成功' })
-            setTimeout(() => uni.switchTab({ url: '/pages/order/order' }), 1500)
-          } else {
-            uni.showToast({ title: '预订失败', icon: 'error' })
-          }
-        }, 1500)
+          uni.showToast({ title: '预订成功' })
+          
+          // 成功后，延迟跳转到历史订单页面
+          setTimeout(() => uni.navigateTo({ url: '/pages/order/order' }), 1500)
+          
+        } catch (e) {
+          uni.hideLoading()
+          uni.showToast({ title: '预订失败', icon: 'error' })
+          console.error('生成订单失败，请检查数据库设置:', e)
+        }
       }
     }
   })
@@ -119,30 +178,4 @@ const handleJoin = () => {
 .error-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh; }
 .mt-20 { margin-top: 20rpx; }
 .back-btn { margin-top: 60rpx; width: 60%; }
-
-/* 新增：备注相关样式 */
-.remark-section {
-  margin-top: 30rpx;
-  padding-top: 30rpx;
-  border-top: 1px dashed #eee;
-}
-.section-title {
-  display: flex;
-  align-items: center;
-  margin-bottom: 16rpx;
-}
-.title-text {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333;
-  margin-left: 10rpx;
-}
-.remark-content {
-  background-color: #f8f9fa;
-  padding: 20rpx;
-  border-radius: 12rpx;
-  font-size: 26rpx;
-  color: #666;
-  line-height: 1.5;
-}
 </style>
