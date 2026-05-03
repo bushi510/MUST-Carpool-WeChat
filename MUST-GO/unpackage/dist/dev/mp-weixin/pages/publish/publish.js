@@ -170,7 +170,7 @@ const _sfc_main = {
           label: "备注信息",
           name: "remark"
         }),
-        s: common_vendor.sr(formRef, "52a658cc-0", {
+        s: common_vendor.sr(formRef, "54c10a93-0", {
           "k": "formRef"
         }),
         t: common_vendor.p({

@@ -62,8 +62,8 @@ const _sfc_main = {
           circle: true
         })
       } : {}, {
-        f: common_vendor.o(checkLogin, "e0"),
-        g: common_vendor.o(($event) => navTo("/pages/certify/certify"), "fa"),
+        f: common_vendor.o(checkLogin, "2e"),
+        g: common_vendor.o(($event) => navTo("/pages/certify/certify"), "c5"),
         h: common_vendor.p({
           title: "学生认证",
           clickable: true,
@@ -75,7 +75,7 @@ const _sfc_main = {
             color: "#00C853"
           }
         }),
-        i: common_vendor.o(($event) => navTo("/pages/wallet/wallet"), "ec"),
+        i: common_vendor.o(($event) => navTo("/pages/wallet/wallet"), "ce"),
         j: common_vendor.p({
           title: "我的钱包",
           clickable: true,
@@ -88,8 +88,20 @@ const _sfc_main = {
           },
           rightText: common_vendor.unref(userStore).isLogged && common_vendor.unref(userStore).userInfo.walletUploaded ? "已上传" : "未上传"
         }),
-        k: common_vendor.o(($event) => navTo("/pages/service/service"), "45"),
+        k: common_vendor.o(($event) => navTo("/pages/order/order"), "84"),
         l: common_vendor.p({
+          title: "我的订单",
+          clickable: true,
+          showArrow: true,
+          showExtraIcon: true,
+          extraIcon: {
+            type: "list",
+            size: "22",
+            color: "#00C853"
+          }
+        }),
+        m: common_vendor.o(($event) => navTo("/pages/service/service"), "30"),
+        n: common_vendor.p({
           title: "联系客服",
           clickable: true,
           showArrow: true,
@@ -100,12 +112,12 @@ const _sfc_main = {
             color: "#00C853"
           }
         }),
-        m: common_vendor.p({
+        o: common_vendor.p({
           border: false
         }),
-        n: common_vendor.unref(userStore).isLogged
+        p: common_vendor.unref(userStore).isLogged
       }, common_vendor.unref(userStore).isLogged ? {
-        o: common_vendor.o(handleLogout, "b7")
+        q: common_vendor.o(handleLogout, "4b")
       } : {});
     };
   }

@@ -29,7 +29,14 @@
           :rightText="userStore.isLogged && userStore.userInfo.walletUploaded ? '已上传' : '未上传'" 
           @click="navTo('/pages/wallet/wallet')" 
         />
-        
+        <uni-list-item 
+                  title="我的订单" 
+                  clickable 
+                  showArrow 
+                  showExtraIcon 
+                  :extraIcon="{type: 'list', size: '22', color: '#00C853'}" 
+                  @click="navTo('/pages/order/order')" 
+        />
         <uni-list-item title="联系客服" clickable showArrow showExtraIcon :extraIcon="{type: 'headphones', size: '22', color: '#00C853'}" @click="navTo('/pages/service/service')" />
       </uni-list>
     </view>
