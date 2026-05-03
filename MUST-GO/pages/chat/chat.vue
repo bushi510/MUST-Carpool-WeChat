@@ -9,7 +9,7 @@
         </view>
         
         <view class="bubble-container">
-          <text v-if="!msg.isMe" class="user-name">队友</text>
+          <text v-if="!msg.isMe" class="user-name">{{ isKefu ? 'Must-go小助手' : '队友' }}</text>
           <view class="bubble">{{ msg.text }}</view>
         </view>
 
@@ -32,10 +32,12 @@
 <script setup>
 import { ref, nextTick } from 'vue'
 import { onLoad, onUnload } from '@dcloudio/uni-app'
+import { post } from '../../utils/request'
 
 const inputVal = ref('')
 const bottomId = ref('')
 const currentRideId = ref(null)
+const isKefu = ref(false)
 // 1. 这里必须是空数组，不能有假数据
 const msgs = ref([]) 
 
@@ -48,7 +50,13 @@ onLoad((options) => {
   currentUserId.value = userInfo && userInfo._id ? userInfo._id : 'test_user_001'
 // ...
 
-  if (options.rideId) {
+  if (options.target === 'kefu') {
+    isKefu.value = true
+    uni.setNavigationBarTitle({ title: 'AI 智能客服' })
+    msgs.value = [
+      { id: 'sys', text: '你好！我是拼车GO的AI助手，可以根据当前最新的拼车信息为您解答问题。', isMe: false }
+    ]
+  } else if (options.rideId) {
     currentRideId.value = options.rideId
     // 2. 开启微信云数据库监听
     startWatch()
@@ -103,6 +111,25 @@ const send = async () => {
 
   const textToSend = inputVal.value
   inputVal.value = '' 
+
+  if (isKefu.value) {
+    msgs.value.push({ id: Date.now().toString(), text: textToSend, isMe: true })
+    scrollToBottom()
+
+    uni.showLoading({ title: '思考中...' })
+    try {
+      const res = await post('/api/chat', { question: textToSend })
+      uni.hideLoading()
+      msgs.value.push({ id: Date.now().toString() + '_ai', text: res.reply || '无响应', isMe: false })
+      scrollToBottom()
+    } catch (e) {
+      uni.hideLoading()
+      uni.showToast({ title: '网络请求失败', icon: 'none' })
+      inputVal.value = textToSend
+      console.error('AI 客服请求错误:', e)
+    }
+    return
+  }
 
   try {
     const db = wx.cloud.database()

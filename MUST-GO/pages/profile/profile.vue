@@ -11,16 +11,25 @@
         <text class="name font-bold">{{ userStore.isLogged ? userStore.userInfo.name : '点击登录' }}</text>
         <view class="tags" v-if="userStore.isLogged">
           <uni-tag :text="`信用分 ${userStore.userInfo.creditScore}`" type="success" size="small" circle />
-          <uni-tag :text="userStore.userInfo.isCertified ? '已认证车主' : '未认证'" :type="userStore.userInfo.isCertified ? 'primary' : 'default'" size="small" circle style="margin-left: 10rpx;" />
+          <uni-tag :text="userStore.userInfo.isCertified ? '已认证学生' : '未认证'":type="userStore.userInfo.isCertified ? 'primary' : 'default'" size="small" circle style="margin-left: 10rpx;" />
         </view>
       </view>
     </view>
     
     <view class="menu-list modern-card">
       <uni-list :border="false">
-        <uni-list-item title="车主认证" clickable showArrow showExtraIcon :extraIcon="{type: 'vip', size: '22', color: '#00C853'}" @click="navTo('/pages/certify/certify')" />
-        <uni-list-item title="我的钱包" clickable showArrow showExtraIcon :extraIcon="{type: 'wallet', size: '22', color: '#00C853'}" rightText="￥0.00" @click="navTo('/pages/wallet/wallet')" />
-		<uni-list-item title="我的订单" clickable showArrow showExtraIcon :extraIcon="{type: 'list', size: '22', color: '#00C853'}" @click="navTo('/pages/order/order')" />
+        <uni-list-item title="学生认证" clickable showArrow showExtraIcon :extraIcon="{type: 'vip', size: '22', color: '#00C853'}" @click="navTo('/pages/certify/certify')" />
+        
+        <uni-list-item 
+          title="我的钱包" 
+          clickable 
+          showArrow 
+          showExtraIcon 
+          :extraIcon="{type: 'wallet', size: '22', color: '#00C853'}" 
+          :rightText="userStore.isLogged && userStore.userInfo.walletUploaded ? '已上传' : '未上传'" 
+          @click="navTo('/pages/wallet/wallet')" 
+        />
+        
         <uni-list-item title="联系客服" clickable showArrow showExtraIcon :extraIcon="{type: 'headphones', size: '22', color: '#00C853'}" @click="navTo('/pages/service/service')" />
       </uni-list>
     </view>

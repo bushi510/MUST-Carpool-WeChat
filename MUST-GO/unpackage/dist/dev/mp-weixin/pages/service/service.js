@@ -34,7 +34,7 @@ const _sfc_main = {
           title: "如何发布拼车行程？"
         }),
         e: common_vendor.p({
-          title: "车主认证需要多久？"
+          title: "学生认证需要多久？"
         }),
         f: common_vendor.p({
           title: "如何取消已预订的行程？"

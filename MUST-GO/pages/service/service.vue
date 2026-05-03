@@ -20,8 +20,8 @@
         <uni-collapse-item title="如何发布拼车行程？">
           <view class="content text-sub">点击首页右下角的加号按钮，填写您的出发地、目的地、时间和预期价格后即可发布。</view>
         </uni-collapse-item>
-        <uni-collapse-item title="车主认证需要多久？">
-          <view class="content text-sub">提交真实姓名、车牌号和车辆型号后，系统将在1-3个工作日内完成审核。</view>
+        <uni-collapse-item title="学生认证需要多久？">
+          <view class="content text-sub">提交真实姓名、学号和性别后，系统将在1-3个工作日内完成审核。</view>
         </uni-collapse-item>
         <uni-collapse-item title="如何取消已预订的行程？">
           <view class="content text-sub">请在“我的订单”页面找到对应订单，点击进入详情后选择取消。若距离发车不足1小时，可能会扣除部分信用分。</view>

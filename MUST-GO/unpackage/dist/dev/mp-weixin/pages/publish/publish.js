@@ -91,7 +91,7 @@ const _sfc_main = {
       if (!userStore.isLogged)
         return common_vendor.index.navigateTo({ url: "/pages/login/login" });
       if (!userStore.userInfo.isCertified)
-        return common_vendor.index.showToast({ title: "请先完成车主认证", icon: "none" });
+        return common_vendor.index.showToast({ title: "请先完成学生认证", icon: "none" });
       try {
         await formRef.value.validate();
         isSubmitting.value = true;
@@ -170,7 +170,7 @@ const _sfc_main = {
           label: "备注信息",
           name: "remark"
         }),
-        s: common_vendor.sr(formRef, "1dfa478f-0", {
+        s: common_vendor.sr(formRef, "52a658cc-0", {
           "k": "formRef"
         }),
         t: common_vendor.p({

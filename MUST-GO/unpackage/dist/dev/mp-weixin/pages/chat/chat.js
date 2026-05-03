@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_request = require("../../utils/request.js");
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
@@ -16,13 +17,20 @@ const _sfc_main = {
     const inputVal = common_vendor.ref("");
     const bottomId = common_vendor.ref("");
     const currentRideId = common_vendor.ref(null);
+    const isKefu = common_vendor.ref(false);
     const msgs = common_vendor.ref([]);
     const currentUserId = common_vendor.ref("");
     let watcher = null;
     common_vendor.onLoad((options) => {
       const userInfo = common_vendor.index.getStorageSync("userInfo");
       currentUserId.value = userInfo && userInfo._id ? userInfo._id : "test_user_001";
-      if (options.rideId) {
+      if (options.target === "kefu") {
+        isKefu.value = true;
+        common_vendor.index.setNavigationBarTitle({ title: "AI 智能客服" });
+        msgs.value = [
+          { id: "sys", text: "你好！我是拼车GO的AI助手，可以根据当前最新的拼车信息为您解答问题。", isMe: false }
+        ];
+      } else if (options.rideId) {
         currentRideId.value = options.rideId;
         startWatch();
       } else {
@@ -53,7 +61,7 @@ const _sfc_main = {
           scrollToBottom();
         },
         onError: (err) => {
-          common_vendor.index.__f__("error", "at pages/chat/chat.vue:89", "监听失败:", err);
+          common_vendor.index.__f__("error", "at pages/chat/chat.vue:97", "监听失败:", err);
         }
       });
     };
@@ -70,6 +78,23 @@ const _sfc_main = {
         return;
       const textToSend = inputVal.value;
       inputVal.value = "";
+      if (isKefu.value) {
+        msgs.value.push({ id: Date.now().toString(), text: textToSend, isMe: true });
+        scrollToBottom();
+        common_vendor.index.showLoading({ title: "思考中..." });
+        try {
+          const res = await utils_request.post("/api/chat", { question: textToSend });
+          common_vendor.index.hideLoading();
+          msgs.value.push({ id: Date.now().toString() + "_ai", text: res.reply || "无响应", isMe: false });
+          scrollToBottom();
+        } catch (e) {
+          common_vendor.index.hideLoading();
+          common_vendor.index.showToast({ title: "网络请求失败", icon: "none" });
+          inputVal.value = textToSend;
+          common_vendor.index.__f__("error", "at pages/chat/chat.vue:129", "AI 客服请求错误:", e);
+        }
+        return;
+      }
       try {
         const db = common_vendor.wx$1.cloud.database();
         await db.collection("chat_messages").add({
@@ -83,7 +108,7 @@ const _sfc_main = {
       } catch (e) {
         common_vendor.index.showToast({ title: "发送失败", icon: "none" });
         inputVal.value = textToSend;
-        common_vendor.index.__f__("error", "at pages/chat/chat.vue:121", "发送错误:", e);
+        common_vendor.index.__f__("error", "at pages/chat/chat.vue:148", "发送错误:", e);
       }
     };
     return (_ctx, _cache) => {
@@ -100,30 +125,32 @@ const _sfc_main = {
             })
           } : {}, {
             d: !msg.isMe
-          }, !msg.isMe ? {} : {}, {
-            e: common_vendor.t(msg.text),
-            f: msg.isMe
+          }, !msg.isMe ? {
+            e: common_vendor.t(isKefu.value ? "Must-go小助手" : "队友")
+          } : {}, {
+            f: common_vendor.t(msg.text),
+            g: msg.isMe
           }, msg.isMe ? {
-            g: "0a633310-1-" + i0,
-            h: common_vendor.p({
+            h: "0a633310-1-" + i0,
+            i: common_vendor.p({
               type: "person-filled",
               size: "24",
               color: "#fff"
             })
           } : {}, {
-            i: msg.id,
-            j: common_vendor.n(msg.isMe ? "me" : "other")
+            j: msg.id,
+            k: common_vendor.n(msg.isMe ? "me" : "other")
           });
         }),
         b: bottomId.value,
-        c: common_vendor.o(($event) => inputVal.value = $event, "34"),
+        c: common_vendor.o(($event) => inputVal.value = $event, "04"),
         d: common_vendor.p({
           placeholder: "发消息...",
           clearable: false,
           inputBorder: false,
           modelValue: inputVal.value
         }),
-        e: common_vendor.o(send, "4d")
+        e: common_vendor.o(send, "ce")
       };
     };
   }

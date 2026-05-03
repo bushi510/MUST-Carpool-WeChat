@@ -8,7 +8,7 @@
     { "path": "pages/ride-detail/ride-detail", "style": { "navigationBarTitleText": "行程详情" } },
     { "path": "pages/order/order", "style": { "navigationBarTitleText": "我的订单" } },
     { "path": "pages/chat/chat", "style": { "navigationBarTitleText": "消息" } },
-    { "path": "pages/certify/certify", "style": { "navigationBarTitleText": "车主认证" } },
+    { "path": "pages/certify/certify", "style": { "navigationBarTitleText": "学生认证" } },
     { "path": "pages/wallet/wallet", "style": { "navigationBarTitleText": "我的钱包" } },
     { "path": "pages/service/service", "style": { "navigationBarTitleText": "客服中心" } }
   ],

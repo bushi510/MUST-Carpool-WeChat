@@ -56,16 +56,16 @@ const _sfc_main = {
           circle: true
         }),
         e: common_vendor.p({
-          text: common_vendor.unref(userStore).userInfo.isCertified ? "已认证车主" : "未认证",
+          text: common_vendor.unref(userStore).userInfo.isCertified ? "已认证学生" : "未认证",
           type: common_vendor.unref(userStore).userInfo.isCertified ? "primary" : "default",
           size: "small",
           circle: true
         })
       } : {}, {
         f: common_vendor.o(checkLogin, "e0"),
-        g: common_vendor.o(($event) => navTo("/pages/certify/certify"), "69"),
+        g: common_vendor.o(($event) => navTo("/pages/certify/certify"), "fa"),
         h: common_vendor.p({
-          title: "车主认证",
+          title: "学生认证",
           clickable: true,
           showArrow: true,
           showExtraIcon: true,
@@ -75,7 +75,7 @@ const _sfc_main = {
             color: "#00C853"
           }
         }),
-        i: common_vendor.o(($event) => navTo("/pages/wallet/wallet"), "4f"),
+        i: common_vendor.o(($event) => navTo("/pages/wallet/wallet"), "ec"),
         j: common_vendor.p({
           title: "我的钱包",
           clickable: true,
@@ -86,22 +86,10 @@ const _sfc_main = {
             size: "22",
             color: "#00C853"
           },
-          rightText: "￥0.00"
+          rightText: common_vendor.unref(userStore).isLogged && common_vendor.unref(userStore).userInfo.walletUploaded ? "已上传" : "未上传"
         }),
-        k: common_vendor.o(($event) => navTo("/pages/order/order"), "3c"),
+        k: common_vendor.o(($event) => navTo("/pages/service/service"), "45"),
         l: common_vendor.p({
-          title: "我的订单",
-          clickable: true,
-          showArrow: true,
-          showExtraIcon: true,
-          extraIcon: {
-            type: "list",
-            size: "22",
-            color: "#00C853"
-          }
-        }),
-        m: common_vendor.o(($event) => navTo("/pages/service/service"), "48"),
-        n: common_vendor.p({
           title: "联系客服",
           clickable: true,
           showArrow: true,
@@ -112,12 +100,12 @@ const _sfc_main = {
             color: "#00C853"
           }
         }),
-        o: common_vendor.p({
+        m: common_vendor.p({
           border: false
         }),
-        p: common_vendor.unref(userStore).isLogged
+        n: common_vendor.unref(userStore).isLogged
       }, common_vendor.unref(userStore).isLogged ? {
-        q: common_vendor.o(handleLogout, "eb")
+        o: common_vendor.o(handleLogout, "b7")
       } : {});
     };
   }

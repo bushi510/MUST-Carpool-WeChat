@@ -107,7 +107,7 @@ const submit = async () => {
   if (isSubmitting.value) return // 防抖锁
   
   if (!userStore.isLogged) return uni.navigateTo({ url: '/pages/login/login' })
-  if (!userStore.userInfo.isCertified) return uni.showToast({ title: '请先完成车主认证', icon: 'none' })
+  if (!userStore.userInfo.isCertified) return uni.showToast({ title: '请先完成学生认证', icon: 'none' })
 
   try {
     await formRef.value.validate()
