@@ -9,6 +9,8 @@
          :longitude="currentLoc.lng" 
          :markers="markers"
          :polyline="polyline"
+         @markertap="onMarkerTap"
+         @callouttap="onMarkerTap"
          show-location>
     </map>
     
@@ -20,9 +22,9 @@
       
       <uni-transition mode="fade" :show="true">
         <uni-list :border="false">
-          <uni-list-item v-for="ride in rideStore.rides.filter(r => r.status === 'recruiting')" :key="ride._id || ride.id" clickable @click="goDetail(ride._id || ride.id)">
+          <uni-list-item v-for="(ride, index) in rideStore.rides.filter(r => r.status === 'recruiting')" :key="ride._id || ride.id || index" clickable @click="goDetail(ride._id || ride.id)">
             <template v-slot:body>
-              <view class="ride-item">
+              <view class="ride-item" @click.stop="goDetail(ride._id || ride.id)">
                 <view class="route">
                   <text class="text-main font-bold">{{ ride.start }} ➔ {{ ride.end }}</text>
                   <text class="time text-sub">{{ ride.time }} 出发 | 剩余 {{ ride.seats }} 座</text>
@@ -50,13 +52,25 @@ const rideStore = useRideStore()
 const currentLoc = ref({ lat: 22.543099, lng: 113.938036 })
 
 const markers = computed(() => {
-  return rideStore.rides.map(r => ({
-    id: r.id, latitude: r.lat, longitude: r.lng, title: r.driver,
+  return rideStore.rides.map((r, index) => ({
+    id: index, // 微信地图 marker 的 id 必须是数字
+    rideId: r._id || r.id, // 自定义属性保存真实字符串 ID
+    latitude: r.lat || 22.543099, 
+    longitude: r.lng || 113.938036, 
+    title: r.driver,
     iconPath: '../../static/car.png', 
     width: 32, height: 32,
     callout: { content: ` ${r.start} ➔ ${r.end} `, color: '#fff', bgColor: '#00C853', padding: 8, borderRadius: 10, display: 'ALWAYS' }
   }))
 })
+
+const onMarkerTap = (e) => {
+  const markerId = e.detail.markerId
+  const targetMarker = markers.value.find(m => m.id === markerId)
+  if (targetMarker && targetMarker.rideId) {
+    goDetail(targetMarker.rideId)
+  }
+}
 
 const polyline = ref([{
   points: [{latitude: 22.543099, longitude: 113.938036}, {latitude: 22.550000, longitude: 113.950000}],
@@ -107,8 +121,8 @@ const goPublish = () => uni.navigateTo({ url: `/pages/publish/publish` })
 <style lang="scss" scoped>
 .home-page { height: 100vh; display: flex; flex-direction: column; position: relative; }
 .search-wrap { position: absolute; top: 20rpx; left: 20rpx; right: 20rpx; z-index: 10; }
-.map-view { width: 100%; height: 55vh; }
-.bottom-panel { height: 45vh; margin-top: -40rpx; z-index: 5; padding: 30rpx; }
+.map-view { width: 100%; height: 55vh; z-index: 0; }
+.bottom-panel { height: 45vh; margin-top: -40rpx; z-index: 5; position: relative; padding: 30rpx; background-color: #fff; border-radius: 40rpx 40rpx 0 0; }
 .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20rpx; }
 .title { font-size: 36rpx; font-weight: bold; }
 .ride-item { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 20rpx 0; border-bottom: 1px solid var(--pc-border); }

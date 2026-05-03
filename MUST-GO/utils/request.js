@@ -2,7 +2,7 @@
 // 注意：如果是在电脑微信开发者工具模拟器中测试，可以使用 127.0.0.1。
 // 如果是扫码在【手机真机】上测试，必须将 127.0.0.1 替换为你电脑此时真实的局域网 IPv4 地址（如 10.6.12.59）。
 //本地ipv4地址在终端输入ipconfig查看
-const BASE_URL = 'http://127.0.0.1:5000'
+const BASE_URL = 'http://192.168.31.201:5000'
 
 export function request(method, path, data = {}) {
   return new Promise((resolve, reject) => {

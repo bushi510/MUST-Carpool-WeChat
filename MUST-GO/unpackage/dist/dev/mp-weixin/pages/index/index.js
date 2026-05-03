@@ -23,10 +23,13 @@ const _sfc_main = {
     const rideStore = stores_ride.useRideStore();
     const currentLoc = common_vendor.ref({ lat: 22.543099, lng: 113.938036 });
     const markers = common_vendor.computed(() => {
-      return rideStore.rides.map((r) => ({
-        id: r.id,
-        latitude: r.lat,
-        longitude: r.lng,
+      return rideStore.rides.map((r, index) => ({
+        id: index,
+        // 微信地图 marker 的 id 必须是数字
+        rideId: r._id || r.id,
+        // 自定义属性保存真实字符串 ID
+        latitude: r.lat || 22.543099,
+        longitude: r.lng || 113.938036,
         title: r.driver,
         iconPath: "../../static/car.png",
         width: 32,
@@ -34,6 +37,13 @@ const _sfc_main = {
         callout: { content: ` ${r.start} ➔ ${r.end} `, color: "#fff", bgColor: "#00C853", padding: 8, borderRadius: 10, display: "ALWAYS" }
       }));
     });
+    const onMarkerTap = (e) => {
+      const markerId = e.detail.markerId;
+      const targetMarker = markers.value.find((m) => m.id === markerId);
+      if (targetMarker && targetMarker.rideId) {
+        goDetail(targetMarker.rideId);
+      }
+    };
     const polyline = common_vendor.ref([{
       points: [{ latitude: 22.543099, longitude: 113.938036 }, { latitude: 22.55, longitude: 113.95 }],
       color: "#00C853",
@@ -85,40 +95,43 @@ const _sfc_main = {
         d: currentLoc.value.lng,
         e: markers.value,
         f: polyline.value,
-        g: common_vendor.o(refreshData, "e2"),
-        h: common_vendor.p({
+        g: common_vendor.o(onMarkerTap, "4b"),
+        h: common_vendor.o(onMarkerTap, "61"),
+        i: common_vendor.o(refreshData, "d8"),
+        j: common_vendor.p({
           type: "loop",
           size: "24",
           color: "var(--pc-primary)"
         }),
-        i: common_vendor.f(common_vendor.unref(rideStore).rides.filter((r) => r.status === "recruiting"), (ride, k0, i0) => {
+        k: common_vendor.f(common_vendor.unref(rideStore).rides.filter((r) => r.status === "recruiting"), (ride, index, i0) => {
           return {
             a: common_vendor.t(ride.start),
             b: common_vendor.t(ride.end),
             c: common_vendor.t(ride.time),
             d: common_vendor.t(ride.seats),
             e: common_vendor.t(ride.price),
-            f: ride._id || ride.id,
-            g: common_vendor.o(($event) => goDetail(ride._id || ride.id), ride._id || ride.id),
-            h: "1cf27b2a-4-" + i0 + ",1cf27b2a-3"
+            f: common_vendor.o(($event) => goDetail(ride._id || ride.id), ride._id || ride.id || index),
+            g: ride._id || ride.id || index,
+            h: common_vendor.o(($event) => goDetail(ride._id || ride.id), ride._id || ride.id || index),
+            i: "1cf27b2a-4-" + i0 + ",1cf27b2a-3"
           };
         }),
-        j: common_vendor.p({
+        l: common_vendor.p({
           clickable: true
         }),
-        k: common_vendor.p({
+        m: common_vendor.p({
           border: false
         }),
-        l: common_vendor.p({
+        n: common_vendor.p({
           mode: "fade",
           show: true
         }),
-        m: common_vendor.p({
+        o: common_vendor.p({
           type: "plusempty",
           size: "30",
           color: "#fff"
         }),
-        n: common_vendor.o(goPublish, "de")
+        p: common_vendor.o(goPublish, "16")
       };
     };
   }
